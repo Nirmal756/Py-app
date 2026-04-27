@@ -13,6 +13,14 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
+    - name: compose down
+      run: |
+        docker compose down
+
+    - name: pruning
+      run: |
+        docker system prune -a
+
     - name: Creating build
       run: |
         docker compose up -d --build
