@@ -1,0 +1,27 @@
+name: CI/CD for Pyapp
+
+on:
+  push:
+    branch: ["dev"]
+  workflow_dispatch:
+
+jobs:
+  run-simulation:
+    runs-on: [self-hosted, pyapp-runner]
+
+  steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: compose down
+      run: |
+        docker compose down
+
+    - name: pruning
+      run: |
+        docker system prune -a
+
+    - name: Creating build
+      run: |
+        docker compose up -d --build
+
