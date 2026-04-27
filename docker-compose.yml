@@ -1,7 +1,8 @@
 services:
   flask_app:
     build: .
-    env_file: .env
+    env_file:
+      - ${ENV_FILE:-.env.prod}
     restart: always
 
   nginx:
